@@ -41,7 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Award.cs" />
+    <Compile Include="AwardObjects\Award.cs" />
+    <Compile Include="AwardObjects\BlueCompareAward.cs" />
+    <Compile Include="AwardObjects\BlueDistinctionPlusAward.cs" />
+    <Compile Include="AwardObjects\BlueFirstAward.cs" />
+    <Compile Include="AwardObjects\BlueStarAward.cs" />
+    <Compile Include="CustomException\AwardCustomException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

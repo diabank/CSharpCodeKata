@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using ProviderQuality.Console.AwardObjects;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProviderQuality.Console
 {
     public class Program
     {
-        public IList<Award> Awards
+        public List<Award> Awards
         {
             get;
             set;
@@ -16,100 +18,27 @@ namespace ProviderQuality.Console
 
             var app = new Program()
             {
-                Awards = new List<Award>
-                {
-                    new Award {Name = "Gov Quality Plus", SellIn = 10, Quality = 20},
-                    new Award {Name = "Blue First", SellIn = 2, Quality = 0},
-                    new Award {Name = "ACME Partner Facility", SellIn = 5, Quality = 7},
-                    new Award {Name = "Blue Distinction Plus", SellIn = 0, Quality = 80},
-                    new Award {Name = "Blue Compare", SellIn = 15, Quality = 20},
-                    new Award {Name = "Top Connected Providres", SellIn = 3, Quality = 6}
+                Awards = new List<Award> 
+                { 
+                    new Award("Gov Quality Plus", -10, 20),
+                    new BlueFirstAward(-2, 0),
+                    new Award("ACME Partner Facility", -5, 7),
+                    new BlueDistinctionPlusAward(0),
+                    new BlueCompareAward(4, 20),
+                    new Award("Top Connected Providres", -3, 6),
+                    new BlueStarAward(2, 10)
                 }
-
             };
 
             app.UpdateQuality();
 
+            //TODO: Debug - Delete me 
+            //app.Awards.ForEach((_) => System.Console.WriteLine(_.ToString()));
+            
             System.Console.ReadKey();
-
         }
 
-        public void UpdateQuality()
-        {
-            for (var i = 0; i < Awards.Count; i++)
-            {
-                if (Awards[i].Name != "Blue First" && Awards[i].Name != "Blue Compare")
-                {
-                    if (Awards[i].Quality > 0)
-                    {
-                        if (Awards[i].Name != "Blue Distinction Plus")
-                        {
-                            Awards[i].Quality = Awards[i].Quality - 1;
-                        }
-                    }
-                }
-                else
-                {
-                    if (Awards[i].Quality < 50)
-                    {
-                        Awards[i].Quality = Awards[i].Quality + 1;
-
-                        if (Awards[i].Name == "Blue Compare")
-                        {
-                            if (Awards[i].SellIn < 11)
-                            {
-                                if (Awards[i].Quality < 50)
-                                {
-                                    Awards[i].Quality = Awards[i].Quality + 1;
-                                }
-                            }
-
-                            if (Awards[i].SellIn < 6)
-                            {
-                                if (Awards[i].Quality < 50)
-                                {
-                                    Awards[i].Quality = Awards[i].Quality + 1;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (Awards[i].Name != "Blue Distinction Plus")
-                {
-                    Awards[i].SellIn = Awards[i].SellIn - 1;
-                }
-
-                if (Awards[i].SellIn < 0)
-                {
-                    if (Awards[i].Name != "Blue First")
-                    {
-                        if (Awards[i].Name != "Blue Compare")
-                        {
-                            if (Awards[i].Quality > 0)
-                            {
-                                if (Awards[i].Name != "Blue Distinction Plus")
-                                {
-                                    Awards[i].Quality = Awards[i].Quality - 1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Awards[i].Quality = Awards[i].Quality - Awards[i].Quality;
-                        }
-                    }
-                    else
-                    {
-                        if (Awards[i].Quality < 50)
-                        {
-                            Awards[i].Quality = Awards[i].Quality + 1;
-                        }
-                    }
-                }
-            }
-        }
-
+        public void UpdateQuality() => Parallel.ForEach(Awards,(_) => _.ProcessUpdate());     
     }
 
 }
