@@ -32,9 +32,6 @@ namespace ProviderQuality.Console
 
             app.UpdateQuality();
 
-            //TODO: Debug - Delete me 
-            app.Awards.ForEach((_) => System.Console.WriteLine(_.ToString()));
-
             System.Console.ReadKey();
         }
 
