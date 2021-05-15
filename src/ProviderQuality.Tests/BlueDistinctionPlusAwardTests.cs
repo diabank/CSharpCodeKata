@@ -38,9 +38,9 @@ namespace ProviderQuality.Tests
             award.ProcessUpdate();
 
             //Assert
-            Assert.AreEqual(award.ExpiresIn, 9);
+            Assert.AreEqual(award.ExpiresIn, 10);
             Assert.AreEqual(award.Quality, 80);
-            Assert.AreEqual(award.ToString(), "Award Name: Blue Distinction Plus, Expires In: 9, Quality: 80");
+            Assert.AreEqual(award.ToString(), "Award Name: Blue Distinction Plus, Expires In: 10, Quality: 80");
         }
 
         // +++To Do - 1/10/2013: Discuss with team about adding more tests.  Seems like a lot of work for something

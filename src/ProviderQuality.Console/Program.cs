@@ -20,12 +20,12 @@ namespace ProviderQuality.Console
             {
                 Awards = new List<Award> 
                 { 
-                    new Award("Gov Quality Plus", -10, 20),
-                    new BlueFirstAward(-2, 0),
-                    new Award("ACME Partner Facility", -5, 7),
+                    new Award("Gov Quality Plus", 10, 20),
+                    new BlueFirstAward(2, 0),
+                    new Award("ACME Partner Facility", 5, 7),
                     new BlueDistinctionPlusAward(0),
-                    new BlueCompareAward(4, 20),
-                    new Award("Top Connected Providres", -3, 6),
+                    new BlueCompareAward(15, 20),
+                    new Award("Top Connected Providres", 3, 6),
                     new BlueStarAward(2, 10)
                 }
             };
@@ -33,8 +33,8 @@ namespace ProviderQuality.Console
             app.UpdateQuality();
 
             //TODO: Debug - Delete me 
-            //app.Awards.ForEach((_) => System.Console.WriteLine(_.ToString()));
-            
+            app.Awards.ForEach((_) => System.Console.WriteLine(_.ToString()));
+
             System.Console.ReadKey();
         }
 
